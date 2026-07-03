@@ -82,12 +82,12 @@ class HybridRecommender:
         """
         # Scenario A: User Profile Exists & has rated items
         if user_id in self.ratings_df.columns and not (self.ratings_df[user_id] == 0).all():
-            print(f"⚙️ [Collaborative Engine] Routing based on historical trends of {user_id}:")
+            print(f" [Collaborative Engine] Routing based on historical trends of {user_id}:")
             return self._get_collaborative_recommendations(user_id, top_n)
         
         # Scenario B: Cold-start / New User (Relies strictly on item metadata)
         elif last_watched_item:
-            print(f"⚙️ [Content Engine] Cold-Start detected. Routing similarities for '{last_watched_item}':")
+            print(f" [Content Engine] Cold-Start detected. Routing similarities for '{last_watched_item}':")
             return self._get_content_recommendations(last_watched_item, top_n)
         
         else:
@@ -104,9 +104,9 @@ if __name__ == "__main__":
     # TEST CASE 1: Active User profile (Collaborative Tracking)
     # User_C likes Sci-Fi, should map closely to User_A's taste profile.
     rec_user = engine.recommend(user_id='User_C', top_n=1)
-    print(f"➡️ Recommendations: {rec_user}\n")
+    print(f" Recommendations: {rec_user}\n")
 
     # TEST CASE 2: New/Anonymous User (Content / Metadata Fallback)
     # User has no history profile, but just finished watching 'Toy Story'.
     rec_anonymous = engine.recommend(last_watched_item='Toy Story', top_n=1)
-    print(f"➡️ Recommendations: {rec_anonymous}\n")
+    print(f"Recommendations: {rec_anonymous}\n")
